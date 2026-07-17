@@ -6,16 +6,16 @@ Double-click `launch-visual-plotify.bat` from the project root to start the back
 
 ### Screenshots:
 
-#### Step 1
+#### Step 1: Upload an Excel File
 ![Step 1](./screenshot/step_1.png)
 
-#### Step 2
+#### Step 2: Preview the Uploaded File
 ![Step 2](./screenshot/step_2.png)
 
-#### Step 3
+#### Step 3: Choose Column Combinations
 ![Step 3](./screenshot/step_3.png)
 
-#### Step 4
+#### Step 4: Preview and select the chart of your choice
 ![Step 4](./screenshot/step_4.png)
 
 ### If this is your first time running the app
