@@ -6,17 +6,17 @@ Double-click `launch-visual-plotify.bat` from the project root to start the back
 
 ### Screenshots:
 
-# Step 1. 
-(screenshot/step_1.png)
+#### Step 1
+![Step 1](./screenshot/step_1.png)
 
-# Step 2. 
-(screenshot/step_2.png)
+#### Step 2
+![Step 2](./screenshot/step_2.png)
 
-# Step 3. 
-(screenshot/step_3.png)
+#### Step 3
+![Step 3](./screenshot/step_3.png)
 
-# Step 4. 
-(screenshot/step_4.png)
+#### Step 4
+![Step 4](./screenshot/step_4.png)
 
 ### If this is your first time running the app
 1. Install the backend dependencies:
