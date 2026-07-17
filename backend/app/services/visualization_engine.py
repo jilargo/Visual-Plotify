@@ -97,6 +97,21 @@ class DateOnlyStrategy(VisualizationStrategy):
         )
 
 
+class MultiNumericStrategy(VisualizationStrategy):
+    def can_handle(self, df: pd.DataFrame, selected_columns: list[str]) -> bool:
+        return len(selected_columns) > 1 and all(pd.api.types.is_numeric_dtype(df[col]) for col in selected_columns)
+
+    def build(self, df: pd.DataFrame, selected_columns: list[str]) -> ChartSpec:
+        cleaned = df[selected_columns].apply(pd.to_numeric, errors="coerce").fillna(0)
+        xAxis = [str(index + 1) for index in range(len(cleaned))]
+        return ChartSpec(
+            chart_type="line",
+            title="Numeric series comparison",
+            xAxis=xAxis,
+            series=[ChartSeries(name=col, data=cleaned[col].tolist()) for col in selected_columns],
+        )
+
+
 class NumericOnlyStrategy(VisualizationStrategy):
     def can_handle(self, df: pd.DataFrame, selected_columns: list[str]) -> bool:
         return len(selected_columns) == 1 and pd.api.types.is_numeric_dtype(df[selected_columns[0]])
@@ -136,6 +151,7 @@ class VisualizationEngine:
             TextNumericStrategy(),
             DateNumericStrategy(),
             DateOnlyStrategy(),
+            MultiNumericStrategy(),
             NumericOnlyStrategy(),
         ]
 

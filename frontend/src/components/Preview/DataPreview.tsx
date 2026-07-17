@@ -5,10 +5,11 @@ import type { ExcelPreview } from "../../types/excel";
 
 interface Props {
     data: ExcelPreview;
+    selectedSheet?: string | null;
 }
 
 
-export default function DataPreview({ data }: Props) {
+export default function DataPreview({ data, selectedSheet }: Props) {
 
 
     const columns: GridColDef[] = data.columns.map((column) => ({
@@ -45,6 +46,12 @@ export default function DataPreview({ data }: Props) {
                 <b>Sheets:</b>{" "}
                 {data.sheet_names.join(", ")}
             </p>
+
+            {selectedSheet && (
+                <p>
+                    <b>Selected sheet:</b> {selectedSheet}
+                </p>
+            )}
 
 
             <div style={{ height: 400, width: "100%" }}>

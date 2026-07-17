@@ -1,4 +1,4 @@
-﻿from fastapi import APIRouter, UploadFile, File
+﻿from fastapi import APIRouter, UploadFile, File, Query
 from pathlib import Path
 import shutil
 
@@ -23,5 +23,16 @@ async def upload_excel(file: UploadFile = File(...)):
     return {
         "filename": file.filename,
         "file_path": str(file_path),
+        **excel_data
+    }
+
+
+@router.get("/preview", response_model=ExcelMetadataResponse)
+def preview_excel(file_path: str = Query(...), sheet_name: str = Query(...)):
+    file_path_obj = Path(file_path)
+    excel_data = ExcelService.read_excel(file_path_obj, sheet_name=sheet_name)
+    return {
+        "filename": file_path_obj.name,
+        "file_path": str(file_path_obj),
         **excel_data
     }

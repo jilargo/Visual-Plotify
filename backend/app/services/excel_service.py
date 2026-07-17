@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Optional
 import pandas as pd
 import numpy as np
 from pandas.api.types import is_numeric_dtype, is_datetime64_any_dtype, is_bool_dtype
@@ -50,13 +51,16 @@ class ExcelService:
         return stats
 
     @staticmethod
-    def read_excel(file_path: Path):
+    def read_excel(file_path: Path, sheet_name: Optional[str] = None):
 
         excel = pd.ExcelFile(file_path)
 
-        first_sheet = excel.sheet_names[0]
+        if sheet_name is None:
+            sheet_name = excel.sheet_names[0]
+        elif sheet_name not in excel.sheet_names:
+            raise ValueError(f"Sheet '{sheet_name}' not found in {file_path}")
 
-        df = pd.read_excel(file_path, sheet_name=first_sheet)
+        df = pd.read_excel(file_path, sheet_name=sheet_name)
 
         # Build per-column metadata
         column_stats = []
