@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Test and report artifacts
+frontend/playwright-report/
+frontend/test-results/
+
+# Generated sample datasets (rebuilt on demand by the backend)
+backend/uploads/*.csv
+
+# Uploaded copies created by the end-to-end runs
+backend/uploads/*_????????.xlsx

@@ -1,43 +1,32 @@
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
 import Home from "./pages/Home";
+import ColorModeProvider from "./components/ColorModeProvider";
+import { useColorMode } from "./hooks/useColorMode";
+import { darkTheme, lightTheme } from "./theme";
 
-const theme = createTheme({
-    palette: {
-        primary: {
-            main: "#1d4ed8",
-        },
-        secondary: {
-            main: "#0f172a",
-        },
-        background: {
-            default: "#f4f7fb",
-            paper: "#ffffff",
-        },
-        text: {
-            primary: "#0f172a",
-            secondary: "#4b5563",
-        },
-    },
-    typography: {
-        fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-        h3: {
-            fontWeight: 800,
-        },
-        h6: {
-            fontWeight: 700,
-        },
-        button: {
-            textTransform: "none",
-        },
-    },
-});
+function ThemedApp() {
+    const { mode } = useColorMode();
+
+    return (
+        <ThemeProvider theme={mode === "dark" ? darkTheme : lightTheme}>
+            <CssBaseline />
+            <GlobalStyles
+                styles={{
+                    "html, body, #root": { height: "100%" },
+                    body: { display: "flex", flexDirection: "column" },
+                    "h1, h2, h3": { color: "text.primary" },
+                }}
+            />
+            <Home />
+        </ThemeProvider>
+    );
+}
 
 function App() {
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Home />
-        </ThemeProvider>
+        <ColorModeProvider>
+            <ThemedApp />
+        </ColorModeProvider>
     );
 }
 
